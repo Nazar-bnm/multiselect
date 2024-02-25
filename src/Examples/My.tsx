@@ -20,7 +20,7 @@ export default function MultiselectSelectAllExample() {
   );
 
   const [selectedItems, setSelectedItems] = React.useState<string[]>([]);
-  const [filteredItems, setFilteredItems] = React.useState<string[]>(items);
+  const [filterValue, setFilterValue] = React.useState('');
 
   const handleSelectItem = (event: { target: { checked: boolean; value: string; }; }) => {
     const { checked, value } = event.target;
@@ -59,10 +59,7 @@ export default function MultiselectSelectAllExample() {
 
   const handleSearchValueChange = (event: { target: { value: string; }; }) => {
     const value = event.target.value;
-    const newFilteredItems = items.filter((item) =>
-      item.toLowerCase().includes(value.toLowerCase()),
-    );
-    setFilteredItems(newFilteredItems);
+    setFilterValue(value);
   };
 
   return (
@@ -81,12 +78,15 @@ export default function MultiselectSelectAllExample() {
       />
       {categories.map((category) => {
         const val = category.toLowerCase().replace(/\s/g, '-');
+        const categoryItems = devicesData[category].filter((item) =>
+          item.toLowerCase().includes(filterValue.toLowerCase()),
+        );
 
         return (
           <MultiselectCategory
             key={`key-${val}`}
             category={category}
-            items={devicesData[category]}
+            items={categoryItems}
             selectedItems={selectedItems}
             handleSelectItem={handleSelectItem}
             handleSelectManyItems={handleSelectManyItems}

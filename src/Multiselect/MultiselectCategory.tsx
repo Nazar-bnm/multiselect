@@ -25,22 +25,19 @@ export const MultiselectCategory = memo(({
 
   const handleSelectAll = () => {
     handleSelectManyItems(!isAllChecked, items);
-    // if (isAllChecked) {
-    //   setSelectedItemsLocal([]);
-    // } else {
-    //   setSelectedItemsLocal(items);
-    // }
   };
 
   return (
     <>
-      <Multiselect.Option
-        itemId={`item-${val}`}
-        value={category}
-        label={category}
-        onSelectItem={handleSelectAll}
-        isChecked={isAllChecked}
-      />
+      {items.length > 0 && (
+        <Multiselect.Option
+          itemId={`item-${val}`}
+          value={category}
+          label={category}
+          onSelectItem={handleSelectAll}
+          isChecked={isAllChecked}
+        />
+      )}
       {
         items.map((categoryItem) => {
           const val = categoryItem.toLowerCase().replace(/\s/g, '-');
