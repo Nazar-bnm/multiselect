@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Multiselect } from './';
 import { getMultiselectStyles } from './Multiselect.styles';
 
@@ -6,37 +6,30 @@ export interface MultiselectCategoryProps {
   category: string;
   items: string[];
   selectedItems: string[];
-  handleSelectItem: (event: { target: { checked: any; value: any; }; }) => void
+  handleSelectItem: (event: { target: { checked: boolean; value: string; }; }) => void;
+  handleSelectManyItems: (checked: boolean, values: string[]) => void;
 }
 
-export const MultiselectCategory = ({
+export const MultiselectCategory = memo(({
   category,
   items,
   selectedItems,
-  handleSelectItem
+  handleSelectItem,
+  handleSelectManyItems
 }: MultiselectCategoryProps) => {
-  const [selectedItemsLocal, setSelectedItemsLocal] = React.useState<string[]>([]);
   const styles = getMultiselectStyles();
   const val = category.toLowerCase().replace(/\s/g, '-');
-  const isAllChecked = items.every((value) => selectedItemsLocal.includes(value));
+  const isAllChecked = items.every((value) => selectedItems.includes(value));
 
-  const handleSelectItemLocal = (event: { target: { checked: any; value: any; }; }) => {
-    const { checked, value } = event.target;
-    if (checked) {
-      setSelectedItemsLocal((prevState) => [...prevState, value]);
-    } else {
-      setSelectedItemsLocal((prevState) =>
-        prevState.filter((item) => item !== value)
-      );
-    }
-  };
+  // console.log('__RENDER__');
 
   const handleSelectAll = () => {
-    if (isAllChecked) {
-      setSelectedItemsLocal([]);
-    } else {
-      setSelectedItemsLocal(items);
-    }
+    handleSelectManyItems(!isAllChecked, items);
+    // if (isAllChecked) {
+    //   setSelectedItemsLocal([]);
+    // } else {
+    //   setSelectedItemsLocal(items);
+    // }
   };
 
   return (
@@ -59,12 +52,12 @@ export const MultiselectCategory = ({
               itemId={`item-${val}`}
               value={categoryItem}
               label={categoryItem}
-              onSelectItem={handleSelectItemLocal}
-              isChecked={selectedItemsLocal.includes(categoryItem)}
+              onSelectItem={handleSelectItem}
+              isChecked={selectedItems.includes(categoryItem)}
             />
           )
         })
       }
     </>
   );
-};
+});

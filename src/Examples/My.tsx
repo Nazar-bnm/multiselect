@@ -22,13 +22,23 @@ export default function MultiselectSelectAllExample() {
   const [selectedItems, setSelectedItems] = React.useState<string[]>([]);
   const [filteredItems, setFilteredItems] = React.useState<string[]>(items);
 
-  const handleSelectItem = (event: { target: { checked: any; value: any; }; }) => {
+  const handleSelectItem = (event: { target: { checked: boolean; value: string; }; }) => {
     const { checked, value } = event.target;
     if (checked) {
       setSelectedItems((prevState) => [...prevState, value]);
     } else {
       setSelectedItems((prevState) =>
         prevState.filter((item) => item !== value)
+      );
+    }
+  };
+
+  const handleSelectManyItems = (checked: boolean, values: string[]) => {
+    if (checked) {
+      setSelectedItems((prevState) => [...prevState, ...values]);
+    } else {
+      setSelectedItems((prevState) =>
+        prevState.filter((item) => !values.includes(item))
       );
     }
   };
@@ -79,6 +89,7 @@ export default function MultiselectSelectAllExample() {
             items={devicesData[category]}
             selectedItems={selectedItems}
             handleSelectItem={handleSelectItem}
+            handleSelectManyItems={handleSelectManyItems}
           />
         )
       })}
