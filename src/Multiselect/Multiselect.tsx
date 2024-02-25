@@ -11,6 +11,7 @@ import { Subheading } from '@contentful/f36-typography';
 
 import { getMultiselectStyles } from './Multiselect.styles';
 import { MultiselectOption, MultiselectOptionProps } from './MultiselectOption';
+import { MultiselectCategory } from './MultiselectCategory';
 import FocusLock from 'react-focus-lock';
 
 import type { MultiselectSearchProps as SearchProps } from './MultiselectSearch';
@@ -233,7 +234,7 @@ function _Multiselect(props: MultiselectProps, ref: React.Ref<HTMLDivElement>) {
     () =>
       countMatchingChildren(
         children,
-        (child) => child.type === MultiselectOption,
+        (child) => (child.type === MultiselectOption || child.type === MultiselectCategory),
       ),
     [children],
   );
@@ -243,7 +244,7 @@ function _Multiselect(props: MultiselectProps, ref: React.Ref<HTMLDivElement>) {
     (children: React.ReactNode): React.ReactNode => {
       return iterateOverChildren(
         children,
-        (child) => child.type === MultiselectOption,
+        (child) => (child.type === MultiselectOption  || child.type === MultiselectCategory),
         (child) => {
           const onSelectItem = (event: React.ChangeEvent<HTMLInputElement>) => {
             focusList();

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Multiselect } from '../Multiselect';
+import { MultiselectCategory } from '../Multiselect/MultiselectCategory'
 
 import { devicesMock, type DevicesMock } from './devices';
 
@@ -70,39 +71,17 @@ export default function MultiselectSelectAllExample() {
       />
       {categories.map((category) => {
         const val = category.toLowerCase().replace(/\s/g, '-');
-        return (
-          <div key={`key-${val}`}>
-            <Multiselect.Option
-              itemId={`item-${val}`}
-              value={category}
-              label={category}
-              onSelectItem={handleSelectItem}
-              isChecked={selectedItems.includes(category)}
-            />
-            {
-              devicesData[category].map((categoryItem) => {
-                const val = categoryItem.toLowerCase().replace(/\s/g, '-');
 
-                return (
-                  <Multiselect.Option
-                    key={`key-${val}`}
-                    itemId={`item-${val}`}
-                    value={categoryItem}
-                    label={categoryItem}
-                    onSelectItem={handleSelectItem}
-                    isChecked={selectedItems.includes(categoryItem)}
-                  />
-                )
-              })
-            }
-          </div>
-        );
+        return (
+          <MultiselectCategory
+            key={`key-${val}`}
+            category={category}
+            items={devicesData[category]}
+            selectedItems={selectedItems}
+            handleSelectItem={handleSelectItem}
+          />
+        )
       })}
     </Multiselect>
   );
 }
-
-// export default function MultiselectSelectAllExample() {
-
-// return (<div />)
-// }

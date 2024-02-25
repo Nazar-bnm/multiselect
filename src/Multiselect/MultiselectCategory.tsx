@@ -1,5 +1,6 @@
 import React from 'react';
 import { Multiselect } from './';
+import { getMultiselectStyles } from './Multiselect.styles';
 
 export interface MultiselectCategoryProps {
   category: string;
@@ -14,12 +15,11 @@ export const MultiselectCategory = ({
   selectedItems,
   handleSelectItem
 }: MultiselectCategoryProps) => {
-  // const styles = getMultiselectStyles();
-
+  const styles = getMultiselectStyles();
   const val = category.toLowerCase().replace(/\s/g, '-');
 
   return (
-    <div key={`key-${val}`}>
+    <>
       <Multiselect.Option
         itemId={`item-${val}`}
         value={category}
@@ -33,6 +33,7 @@ export const MultiselectCategory = ({
 
           return (
             <Multiselect.Option
+              className={styles.categoryOptions}
               key={`key-${val}`}
               itemId={`item-${val}`}
               value={categoryItem}
@@ -43,6 +44,6 @@ export const MultiselectCategory = ({
           )
         })
       }
-    </div>
+    </>
   );
 };
