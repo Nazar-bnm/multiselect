@@ -1,23 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-import MultiselectSearchExample from './Examples/MultiselectSearchExample'
-import MultiselectSelectAllExample from './Examples/MultiselectSelectAllExample'
-import My from './Examples/My'
+import MultiselectSelectExample from './Examples/MultiselectSelectExample'
 
 function App() {
   return (
     <div className="App">
-      <MultiselectSearchExample />
-
-      <br />
-
-      <MultiselectSelectAllExample />
-
-      <br />
-
-      <My />
+      <MultiselectSelectExample />
     </div>
   );
 }

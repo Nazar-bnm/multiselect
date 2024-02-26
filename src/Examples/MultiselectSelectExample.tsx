@@ -3,7 +3,7 @@ import { Multiselect } from '../Multiselect';
 
 import { devicesMock, type DevicesMock } from './devices';
 
-export default function MultiselectSelectAllExample() {
+export default function MultiselectSelectExample() {
   const { categories, items, devicesData } = React.useMemo(
     () => {
       const categories = Object.keys(devicesMock);
