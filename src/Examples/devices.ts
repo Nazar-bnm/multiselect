@@ -20,18 +20,15 @@ export const devicesMock = {
     'Fitness Tracker',
     'Augmented Reality Glasses'
   ],
-  home_automation: [
-    'Smart Thermostat',
-    'Smart Light Bulbs',
-    'Smart Plugs',
+  'home automation': [
     'Smart Locks'
   ],
-  entertainment_devices: [
+  'entertainment devices': [
     'Smart TV',
     'Streaming Device',
     'Gaming Console'
   ],
-  networking_devices: [
+  'networking devices': [
     'Router',
     'Modem',
     'Switch',
@@ -43,7 +40,7 @@ export const devicesMock = {
     'Printer',
     'Scanner'
   ],
-  storage_devices: [
+  'storage devices': [
     'External Hard Drive',
     'USB Flash Drive',
     'SD Card',

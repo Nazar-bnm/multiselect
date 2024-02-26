@@ -125,7 +125,7 @@ export const getMultiselectStyles = () => ({
     opacity: 0.5,
     cursor: 'not-allowed',
   }),
-  categoryOptions: css({
+  multiCategoryOptions: css({
     marginLeft: '10px'
   }),
 });

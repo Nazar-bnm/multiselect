@@ -86,13 +86,15 @@ export default function MultiselectSelectAllExample() {
 
       {categories.map((category) => {
         const val = category.toLowerCase().replace(/\s/g, '-');
+        const isSingle = devicesData[category].length === 1;
         const categoryItems = devicesData[category].filter((item) =>
-          item.toLowerCase().includes(filterValue.toLowerCase()),
+          item.toLowerCase().includes(filterValue.toLowerCase())
         );
 
         return (
           <Multiselect.Category
             key={`key-${val}`}
+            isSingle={isSingle}
             category={category}
             items={categoryItems}
             selectedItems={selectedItems}

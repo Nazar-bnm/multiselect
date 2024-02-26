@@ -3,6 +3,7 @@ import { Multiselect } from './';
 import { getMultiselectStyles } from './Multiselect.styles';
 
 export interface MultiselectCategoryProps {
+  isSingle: boolean;
   category: string;
   items: string[];
   selectedItems: string[];
@@ -11,6 +12,7 @@ export interface MultiselectCategoryProps {
 }
 
 export const MultiselectCategory = ({
+  isSingle,
   category,
   items,
   selectedItems,
@@ -27,7 +29,7 @@ export const MultiselectCategory = ({
 
   return (
     <>
-      {items.length > 0 && (
+      {items.length > 0 && !isSingle && (
         <Multiselect.Option
           itemId={`item-${val}`}
           value={category}
@@ -42,7 +44,7 @@ export const MultiselectCategory = ({
 
           return (
             <Multiselect.Option
-              className={styles.categoryOptions}
+              className={isSingle ? '' : styles.multiCategoryOptions}
               key={`key-${val}`}
               itemId={`item-${val}`}
               value={categoryItem}
