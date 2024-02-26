@@ -68,7 +68,11 @@ export default function MultiselectSelectAllExample() {
 
   const areAllSelected = React.useMemo(() => {
     return filteredItems.every((element) => selectedItems.includes(element));
-  }, [selectedItems, filterValue, items]);
+  }, [filteredItems, selectedItems]);
+
+  const isIndeterminate = React.useMemo(() => {
+    return !areAllSelected && filteredItems.some((element) => selectedItems.includes(element));
+  }, [areAllSelected, filteredItems, selectedItems]);
 
   return (
     <Multiselect
@@ -82,6 +86,7 @@ export default function MultiselectSelectAllExample() {
       <Multiselect.SelectAll
         onSelectItem={toggleAll}
         isChecked={areAllSelected}
+        isIndeterminate={isIndeterminate}
       />
 
       {categories.map((category) => {
