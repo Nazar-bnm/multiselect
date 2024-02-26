@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { Multiselect } from './';
 import { getMultiselectStyles } from './Multiselect.styles';
 
@@ -6,25 +6,23 @@ export interface MultiselectCategoryProps {
   category: string;
   items: string[];
   selectedItems: string[];
-  handleSelectItem: (event: { target: { checked: boolean; value: string; }; }) => void;
-  handleSelectManyItems: (checked: boolean, values: string[]) => void;
+  onSelectItem: (event: { target: { checked: boolean; value: string; }; }) => void;
+  onSelectManyItems: (checked: boolean, values: string[]) => void;
 }
 
-export const MultiselectCategory = memo(({
+export const MultiselectCategory = ({
   category,
   items,
   selectedItems,
-  handleSelectItem,
-  handleSelectManyItems
+  onSelectItem,
+  onSelectManyItems
 }: MultiselectCategoryProps) => {
   const styles = getMultiselectStyles();
   const val = category.toLowerCase().replace(/\s/g, '-');
   const isAllChecked = items.every((value) => selectedItems.includes(value));
 
-  // console.log('__RENDER__');
-
   const handleSelectAll = () => {
-    handleSelectManyItems(!isAllChecked, items);
+    onSelectManyItems(!isAllChecked, items);
   };
 
   return (
@@ -49,7 +47,7 @@ export const MultiselectCategory = memo(({
               itemId={`item-${val}`}
               value={categoryItem}
               label={categoryItem}
-              onSelectItem={handleSelectItem}
+              onSelectItem={onSelectItem}
               isChecked={selectedItems.includes(categoryItem)}
             />
           )
@@ -57,4 +55,4 @@ export const MultiselectCategory = memo(({
       }
     </>
   );
-});
+};
