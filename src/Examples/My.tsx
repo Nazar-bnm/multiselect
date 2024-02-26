@@ -45,17 +45,26 @@ export default function MultiselectSelectAllExample() {
 
   const toggleAll = (event: { target: { checked: any; }; }) => {
     const { checked } = event.target;
+    const filteredItems = items.filter((item) =>
+      item.toLowerCase().includes(filterValue.toLowerCase()),
+    );
+
     if (checked) {
-      setSelectedItems(items);
+      setSelectedItems(filteredItems);
     } else {
-      setSelectedItems([]);
+      setSelectedItems((prevState) =>
+        prevState.filter((item) => !filteredItems.includes(item))
+      );
     }
   };
 
   const areAllSelected = React.useMemo(() => {
+    const filteredItems = items.filter((item) =>
+      item.toLowerCase().includes(filterValue.toLowerCase()),
+    );
     // this can affect the app performance with a larger amount of data, consider changing it in your implementation
-    return items.every((element) => selectedItems.includes(element));
-  }, [selectedItems, items]);
+    return filteredItems.every((element) => selectedItems.includes(element));
+  }, [selectedItems, filterValue, items]);
 
   const handleSearchValueChange = (event: { target: { value: string; }; }) => {
     const value = event.target.value;
