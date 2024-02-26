@@ -14,6 +14,7 @@ export interface MultiselectOptionProps {
   onSelectItem: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isChecked?: boolean;
   isDisabled?: boolean;
+  isIndeterminate?: boolean;
 }
 
 export const MultiselectOption = ({
@@ -24,6 +25,7 @@ export const MultiselectOption = ({
   searchValue,
   isChecked = false,
   isDisabled = false,
+  isIndeterminate = false,
   className,
   ...rest
 }: MultiselectOptionProps) => {
@@ -37,6 +39,7 @@ export const MultiselectOption = ({
         onChange={(event) => onSelectItem(event)}
         isChecked={isChecked}
         isDisabled={isDisabled}
+        isIndeterminate={isIndeterminate}
         className={cx(styles.optionCheck, isDisabled && styles.disabled)}
       >
         <Text

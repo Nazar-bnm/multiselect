@@ -22,6 +22,7 @@ export const MultiselectCategory = ({
   const styles = getMultiselectStyles();
   const val = category.toLowerCase().replace(/\s/g, '-');
   const isAllChecked = items.every((value) => selectedItems.includes(value));
+  const isIndeterminate = !isAllChecked && items.some((value) => selectedItems.includes(value));
 
   const handleSelectAll = () => {
     onSelectManyItems(!isAllChecked, items);
@@ -35,6 +36,7 @@ export const MultiselectCategory = ({
           value={category}
           label={category}
           onSelectItem={handleSelectAll}
+          isIndeterminate={isIndeterminate}
           isChecked={isAllChecked}
         />
       )}
